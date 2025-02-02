@@ -8,6 +8,7 @@ import Counter from "./pages/Counter";
 
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Nav from "./components/Nav";
+import Form from "./pages/Form";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,7 +17,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<><Nav/><Counter /></>} />
+          <Route path="/" element={<Form/>}></Route>
+          <Route path="/Counter" element={<><Nav/><Counter /></>} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />}></Route>
         </Routes>
