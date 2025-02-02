@@ -8,8 +8,10 @@ export default function Login() {
   const navigate = useNavigate();
 
 
-  function handleLogin(){
+  function handleLogin(e){
+    e.preventDefault();
     let data = JSON.parse(localStorage.getItem("users"));
+    
     if (data == null) {
       alert("Please register first")
         return;
@@ -17,19 +19,17 @@ export default function Login() {
   
     if (user.email == "") {
         alert("Please enter the email");
-        email.focus();
         return
     }
     if (user.password == "") {
         alert("Please enter the password");
-        password.focus();
         return
     }
   
     let current;
     let flag=true;
     data.some(ele => {
-        if (ele.email == email && ele.password == password) {
+        if (ele.email == user.email && ele.password == user.password) {
             current = ele;
             alert('Logged in successfully');
             current = JSON.stringify(current);

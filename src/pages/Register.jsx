@@ -6,7 +6,8 @@ export default function Register() {
   const navigate = useNavigate();
 
 
-  function handleRegister(){
+  function handleRegister(e){
+    e.preventDefault();
 
     if (user.name == "") {
         alert("Please enter your first name");
@@ -30,7 +31,7 @@ export default function Register() {
         alert("User already exists");
         return;
     } else {
-        users.push(obj);
+        users.push(user);
         localStorage.setItem("users", JSON.stringify(users));
     }
     alert("User Registered successfully");
@@ -81,7 +82,7 @@ export default function Register() {
                   name="name"
                   type="text"
                   value={user.name}
-                  onChange={(e)=>setUser({...user,email:e.target.value})}
+                  onChange={(e)=>setUser({...user,name:e.target.value})}
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
