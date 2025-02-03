@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
+import { useSpring, animated } from "react-spring";
+import Nav, { navObj } from "../components/Nav";
 
 let current,users,currUser;
 
@@ -8,9 +12,23 @@ export default function Form() {
       const[userData,setUserData]=useState({name:"",address:"",email:"",phone:""})
       const [isDirty, setIsDirty] = useState(false);
       
+      function notify(){
+        toast.success('Submitted!', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }
 
       useEffect(() => {
+            
         users = JSON.parse(localStorage.getItem("users"));
+        if(localStorage.getItem("currUser")){
         currUser= JSON.parse(localStorage.getItem("currUser"));
         current=users.find((ele)=>{
             if(ele.email==currUser.email){
@@ -22,6 +40,7 @@ export default function Form() {
         if (current.userData) {
           setUserData(current.userData);
         }
+      }
       }, []);
 
       const handleChange = (e) => {
@@ -42,6 +61,7 @@ export default function Form() {
         })
         localStorage.setItem("users", JSON.stringify(users));
         setIsDirty(false);
+        notify();
       };
 
       useEffect(() => {
@@ -57,6 +77,7 @@ export default function Form() {
       
       return (
         <>
+          <Nav now="Form"/>
           <form className="space-y-4 mx-[20vw] mt-[5vh] mb-[6vh]">
             <div>
               <label className="block text-sm font-medium text-gray-700">
