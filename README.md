@@ -6,7 +6,7 @@ This is a React application built as an assignment from upliance.ai. The applica
 
 You can view the live demo of the application here:
 
-[Live Demo](https://upliance-5h1q.vercel.app/Login)
+[Live Demo](https://upliance-5h1q.vercel.app/)
 
 ## Features
 
