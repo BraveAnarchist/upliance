@@ -6,9 +6,14 @@ import { useSpring, animated } from "react-spring";
 let current, users, currUser;
 
 export default function Dashboard() {
-  let data1 = [2, 3, 4, 5, 7, 3, 2, 3, 4];
-  const labels = data1.map((_, index) => index + 1);
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState([0,23,4,1,2]);
+  let labels = userData.map((_, index) => index + 1);
+
+  const fadeAnimation = useSpring({
+    from: { opacity: 0, transform: "translateY(-1000px)" },
+    to: { opacity: 1, transform: "translateY(0px)" },
+    config: { tension: 100, friction: 30 },
+  });
 
   useEffect(() => {
     users = JSON.parse(localStorage.getItem("users"));
@@ -20,17 +25,19 @@ export default function Dashboard() {
         }
         return false;
       });
-      if (current.userData) {
-        setUserData(current.userData);
+
+      if (current.counterHistory) {
+        setUserData(current.counterHistory);
+        console.log(current);
       }
-      console.log(current.name);
+      data;
     }
   }, []);
 
   const data = [
     {
       label: "Data values",
-      data: data1.map((value, index) => ({
+      data: userData.map((value, index) => ({
         x: labels[index],
         y: value,
       })),
@@ -60,7 +67,14 @@ export default function Dashboard() {
 
       <br />
 
-      <div style={{ width: "70%", height: "500px", margin: "auto" }}>
+      <animated.div
+        style={{
+          width: "70%",
+          height: "500px",
+          margin: "auto",
+          ...fadeAnimation,
+        }}
+      >
         <Chart
           options={{
             data,
@@ -71,7 +85,7 @@ export default function Dashboard() {
             },
           }}
         />
-      </div>
+      </animated.div>
       <h2 className="text-center text-2xl mb-[5vh]">Counter History</h2>
 
       <br />

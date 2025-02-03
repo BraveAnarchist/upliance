@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import Nav from "../components/Nav";
 
-let current, users, currUser;
-let counterHist = [];
+let current,
+  users = JSON.parse(localStorage.getItem("users")),
+  currUser;
 
 export default function Counter() {
   const [count, setCount] = useState(0);
+  let counterHist = useRef([]);
+
   const brightness = count % 100;
   const backgroundColor = `hsl(240, 100%, ${brightness}%)`;
 
@@ -15,10 +18,16 @@ export default function Counter() {
     config: { duration: 500 },
   });
 
+  const fadeAnimation = useSpring({
+    from: { opacity: 0, transform: "translateY(1000px)" },
+    to: { opacity: 1, transform: "translateY(0px)" },
+    config: { tension: 100, friction: 30 },
+  });
+
   useEffect(() => {
-    users = JSON.parse(localStorage.getItem("users"));
     if (localStorage.getItem("currUser")) {
       currUser = JSON.parse(localStorage.getItem("currUser"));
+
       current = users.find((ele) => {
         if (ele.email == currUser.email) {
           return true;
@@ -26,19 +35,21 @@ export default function Counter() {
         return false;
       });
       console.log(current);
-      if (current.counterHistory) {
+      if (current) {
         counterHist = current.counterHistory;
       }
     }
   }, []);
   useEffect(() => {
-    if (localStorage.getItem("currUser")) {
-      counterHist.push(count);
+    if (localStorage.getItem("currUser") && counterHist.current && current) {
+      console.log(count);
+      console.log(counterHist.current)
+      counterHist.current.push(count);
       users = users.map((ele) => {
         if (ele.email == current.email) {
           ele.counterHistory = counterHist;
           return ele;
-        }
+        } else return ele;
       });
       localStorage.setItem("users", JSON.stringify(users));
     }
@@ -49,7 +60,7 @@ export default function Counter() {
       <Nav now="Counter" />
       <animated.div
         className="h-screen flex flex-col items-center justify-center"
-        style={animatedStyle}
+        style={{ ...animatedStyle, ...fadeAnimation }}
       >
         <h1 className="text-4xl text-[#00FF00]">Counter: {count}</h1>
         <div style={{ display: "flex", gap: "1vw", marginTop: "5vh" }}>

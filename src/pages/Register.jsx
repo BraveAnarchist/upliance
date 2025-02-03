@@ -22,7 +22,7 @@ export default function Register() {
         return
     }
 
-    let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("user")) : [];
+    let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
     let verify = users.some((ele) => {
         return ele.email == user.email;
     });

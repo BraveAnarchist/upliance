@@ -10,9 +10,9 @@ export default function Login() {
 
   function handleLogin(e){
     e.preventDefault();
-    let data = JSON.parse(localStorage.getItem("users"));
+    let data = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
     
-    if (data == null) {
+    if (data == []) {
       alert("Please register first")
         return;
     }
@@ -44,8 +44,6 @@ export default function Login() {
       alert("incorrect credentials")
       return;
     }
-  
-  
   }
 
   return (
