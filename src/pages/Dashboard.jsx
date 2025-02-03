@@ -45,7 +45,7 @@ export default function Dashboard() {
 
   const primaryAxis = useMemo(
     () => ({
-      getValue: (datum) => datum.x, // get x value
+      getValue: (datum) => datum.x,
       type: "linear",
     }),
     []
@@ -54,7 +54,7 @@ export default function Dashboard() {
   const secondaryAxes = useMemo(
     () => [
       {
-        getValue: (datum) => datum.y, // get y value
+        getValue: (datum) => datum.y, 
       },
     ],
     []

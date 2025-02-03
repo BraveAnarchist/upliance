@@ -4,7 +4,7 @@ import { Link,useNavigate } from 'react-router-dom'
 
 export const navObj = [
   { name: 'Dashboard', to: '/Dashboard', current: false },
-  { name: 'Counter', to: '/Counter', current: false },
+  { name: 'Counter', to: '/', current: false },
   { name: 'Form', to: '/Form', current: false },
   { name: 'TextEditor', to: '/TextEditor', current: false },
 ]

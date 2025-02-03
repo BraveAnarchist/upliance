@@ -23,7 +23,7 @@ function App() {
         <ToastContainer />
         <Routes>
           <Route path="/Dashboard" element={<><ProtectedRoute><Dashboard/></ProtectedRoute></>}></Route>
-          <Route path="/Counter" element={<><ProtectedRoute><Counter/></ProtectedRoute></>} />
+          <Route path="/" element={<><ProtectedRoute><Counter/></ProtectedRoute></>} />
           <Route path="/TextEditor" element={<><ProtectedRoute><TextEditor /></ProtectedRoute></>} />
           <Route path="/Form" element={<><ProtectedRoute><Form /></ProtectedRoute></>} />
           <Route path="/Register" element={<Register />} />

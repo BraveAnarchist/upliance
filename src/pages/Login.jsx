@@ -34,7 +34,7 @@ export default function Login() {
             alert('Logged in successfully');
             current = JSON.stringify(current);
             localStorage.setItem("currUser", current);
-            navigate("/Counter");
+            navigate("/");
             flag=false
             return;
         } 
