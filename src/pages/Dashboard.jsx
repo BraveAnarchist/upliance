@@ -6,7 +6,7 @@ import { useSpring, animated } from "react-spring";
 let current, users, currUser;
 
 export default function Dashboard() {
-  const [userData, setUserData] = useState([0,23,4,1,2]);
+  const [userData, setUserData] = useState([0]);
   let labels = userData.map((_, index) => index + 1);
 
   const fadeAnimation = useSpring({
@@ -25,12 +25,11 @@ export default function Dashboard() {
         }
         return false;
       });
-
+      console.log(current.counterHistory);
       if (current.counterHistory) {
         setUserData(current.counterHistory);
-        console.log(current);
+        console.log(userData);
       }
-      data;
     }
   }, []);
 

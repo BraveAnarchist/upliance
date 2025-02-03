@@ -26,6 +26,7 @@ export default function Counter() {
 
   useEffect(() => {
     if (localStorage.getItem("currUser")) {
+      users = JSON.parse(localStorage.getItem("users")),
       currUser = JSON.parse(localStorage.getItem("currUser"));
 
       current = users.find((ele) => {
@@ -34,20 +35,20 @@ export default function Counter() {
         }
         return false;
       });
-      console.log(current);
-      if (current) {
+      console.log(current)
+      if (current && current.counterHistory) {
         counterHist = current.counterHistory;
       }
     }
   }, []);
   useEffect(() => {
     if (localStorage.getItem("currUser") && counterHist.current && current) {
-      console.log(count);
-      console.log(counterHist.current)
+      // console.log(count);
+      // console.log(counterHist.current)
       counterHist.current.push(count);
       users = users.map((ele) => {
         if (ele.email == current.email) {
-          ele.counterHistory = counterHist;
+          ele.counterHistory = counterHist.current;
           return ele;
         } else return ele;
       });
