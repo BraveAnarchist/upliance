@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Nav from "./components/Nav";
 import Form from "./pages/Form";
 import TextEditor from "./pages/TextEditor";
-import Dashboard from "./pages/DashBoard";
+import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
